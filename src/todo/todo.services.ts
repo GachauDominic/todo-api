@@ -24,3 +24,15 @@ export const getTodoByIdService = async (id: number) => {
   })
     return todoById
 }
+
+//update todo by id
+export const updateTodoByIdService = async (id: number, todo: TITodo) => {
+  await db.update(TodoTable).set(todo).where(eq(TodoTable.id, id))
+  return "Todo updated successfully!"
+}
+
+//delete a todo by its id
+export const deleteTodoByIdService = async (id: number) => {
+  await db.delete(TodoTable).where(eq(TodoTable.id, id)).returning()
+  return "Todo deleted successfully";
+}

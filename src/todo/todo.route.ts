@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { createTodoController, getAllTodoController, getTodoByIdController } from "./todo.controller";
+import { createTodoController, deleteTodoController, getAllTodoController, getTodoByIdController, updateTodoController } from "./todo.controller";
 
 const todo = (app: Express) => {
   //route path
@@ -34,6 +34,30 @@ const todo = (app: Express) => {
       }
     }
   )
+
+  // update a todo by its ID
+  app.route("/todo/:id").put(
+    async (req, res, next) => {
+      try {
+        await updateTodoController(req, res)
+      } catch (error) {
+        next(error)
+      }
+    }
+  )
+
+  //delete a todo by id
+  app.route("/todo/:id").delete(
+    async (req, res, next) => {
+      try {
+        await deleteTodoController(req, res)
+      } catch (error) {
+        next(error)
+      }
+    }
+  )
+
 }
+
 
 export default todo
