@@ -1,0 +1,23 @@
+{
+  
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    "moduleResolution": "nodenext",
+    
+    // File Layout
+    "outDir": "./dist",
+   
+    // Recommended Options
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+  },
+
+  "include": ["src/**/*"],
+  
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

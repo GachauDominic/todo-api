@@ -1,0 +1,33 @@
+#Test the base URL
+GET http://localhost:8080
+
+### Create a user
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Dan",
+  "lastName": "Nduta",
+  "email": "ndutadan@gmail.com",
+  "password": "ddsfgghghb@$1987"
+}
+
+### Create a todo
+POST http://localhost:8080/todo
+Content-Type: application/json
+#remember that the userID must match an existing one int rhe pgAdmin table and the column names must also match those in your schema
+
+{
+  "userId": 19,
+  "todoName": "Go to the gym",
+  "dueDate": "2026-03-10",
+  "description": "Chest & shoulders day",
+  "isCompleted": false
+}
+
+### Get all Todos
+POST http://localhost:8080/todos
+
+
+### Get a todo by Id
+GET  http://localhost:8080/todo/22
