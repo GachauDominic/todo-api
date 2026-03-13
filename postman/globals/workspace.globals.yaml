@@ -1,0 +1,5 @@
+name: Globals
+values:
+  - key: Base_Url_Todo
+    value: ''
+    enabled: true

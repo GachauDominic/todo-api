@@ -1,6 +1,6 @@
 //routing
 import { Express } from "express";
-import { createUserController } from "./auth.controller";
+import { createUserController, getAllUsersController, loginUserController } from "./auth.controller";
 
 
 const user = (app: Express)=>{
@@ -14,6 +14,32 @@ const user = (app: Express)=>{
       }
     }
   )
+
+  //login route
+  app.route("/auth/login").post(
+    async (req, res, next) => {
+      try {
+        await loginUserController(req, res)
+      } catch (error) {
+        next(error)
+      }
+    }
+  )
+
+
+  //get all users
+  app.route("/auth/users").post(
+    async (req, res, next) => {
+      try {
+        await getAllUsersController(req, res)
+      } catch (error) {
+        next(error)
+      }
+    }
+  )
+  
+  
+  
 }
 
 export default user;

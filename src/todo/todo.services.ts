@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import db from "../Drizzle/db";
-import { TITodo, TodoTable } from "../Drizzle/schema";
+import { TITodo, TIUser, TodoTable, UsersTable } from "../Drizzle/schema";
 
 //create a todo
 export const createTodoService = async (todo: TITodo) => {
@@ -36,3 +36,5 @@ export const deleteTodoByIdService = async (id: number) => {
   await db.delete(TodoTable).where(eq(TodoTable.id, id)).returning()
   return "Todo deleted successfully";
 }
+
+

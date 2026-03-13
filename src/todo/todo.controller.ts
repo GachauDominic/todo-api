@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createTodoService, deleteTodoByIdService, getTodoByIdService, getTodoService, updateTodoByIdService } from "./todo.services";
+import { createTodoService, deleteTodoByIdService, getTodoByIdService, getTodoService, updateTodoByIdService,} from "./todo.services";
 
 // create a todo controller
 export const createTodoController = async(req: Request, res:Response) => {

@@ -6,10 +6,10 @@ POST http://localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "firstName": "Dan",
-  "lastName": "Nduta",
-  "email": "ndutadan@gmail.com",
-  "password": "ddsfgghghb@$1987"
+  "firstName": "Pius",
+  "lastName": "Mwiti",
+  "email": "pius@gmail.com",
+  "password": "piusmwiti@123"
 }
 
 ### Create a todo
@@ -23,14 +23,14 @@ Content-Type: application/json
     "dueDate": "2026-09-04",
     "descrption": "sample delete todo",
     "isCompleted": false
-  }
+}
 
 ### Get all Todos
 POST http://localhost:8080/todos
 
 
 ### Get a todo by Id
-GET  http://localhost:8080/todo/22
+GET  http://localhost:8080/todo/23
 
 
 ### update a todo by id
@@ -47,3 +47,17 @@ Content-Type: application/json
 
 ### delete a todo by its id
 DELETE http://localhost:8080/todo/34
+
+
+### login a user
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+   "email": "pius@gmail.com",
+  "password": "piusmwiti@123"
+}
+
+
+### get all users
+POST http://localhost:8080/auth/users
