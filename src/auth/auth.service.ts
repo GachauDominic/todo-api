@@ -25,8 +25,8 @@ export const userLoginService = async (user: TIUser) => {
     firstName: true,
     lastName: true,
     password: true,
-    email: true
-
+    email: true,
+    role: true
   }, where: sql `${UsersTable.email} = ${email}`
   })
 }

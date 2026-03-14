@@ -38,3 +38,10 @@ export const deleteTodoByIdService = async (id: number) => {
 }
 
 
+//get all todos assigned to a specific user
+export const getTodoByUseridService = async (userId: number) => {
+  const todos = await db.query.TodoTable.findMany({
+    where: eq(TodoTable.userId, userId)
+  });
+  return todos;
+}

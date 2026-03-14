@@ -57,7 +57,7 @@ export const loginUserController = async (req: Request, res: Response) => {
    const userMatch = await bycrypt.compareSync(user.password, userExisting.password)
    if (!userMatch) {
     return res.status(401).json({message: "Invalid credentials"})
-   }
+   };
    
    //create a payload
    const payload = {
@@ -65,7 +65,8 @@ export const loginUserController = async (req: Request, res: Response) => {
     "user-id": userExisting.id,
     "fist-name": userExisting.firstName,
     "last-name": userExisting.lastName,
-    "exp-date": Math.floor(Date.now()/1000) + 60 //token expires in 1 minute
+    "role": userExisting.role,
+    "exp": Math.floor(Date.now() / 1000) + 60*60*24 //token expires in 1 minute
    }
 
    //generate a JWT (json web token) 
@@ -73,7 +74,7 @@ export const loginUserController = async (req: Request, res: Response) => {
    if (!secret) {
     throw new Error("JWT_SECRET is not defined in the environment variable");
    }
-   const token = jwt.sign(payload, secret)
+   const token = jwt.sign(payload, secret);
    
 
    //return the token with the user info
@@ -84,7 +85,8 @@ export const loginUserController = async (req: Request, res: Response) => {
       "user-id": userExisting.id,
       "fist-name": userExisting.firstName,
       "last-name": userExisting.lastName,
-      "email": userExisting.email
+      "email": userExisting.email,
+      "role": userExisting.role
      }
    })
 

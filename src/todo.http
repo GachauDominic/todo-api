@@ -6,10 +6,11 @@ POST http://localhost:8080/auth/register
 Content-Type: application/json
 
 {
-  "firstName": "Pius",
-  "lastName": "Mwiti",
-  "email": "pius@gmail.com",
-  "password": "piusmwiti@123"
+  "firstName": "Ceo",
+  "lastName": "owner",
+  "email": "ceo@gmail.com",
+  "password": "ceo@gmail.com",
+  "role": "both"
 }
 
 ### Create a todo
@@ -61,3 +62,7 @@ Content-Type: application/json
 
 ### get all users
 POST http://localhost:8080/auth/users
+
+
+### get todos to a specific user
+GET  http://localhost:8080/todos/user/67

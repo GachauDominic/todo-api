@@ -1,9 +1,12 @@
 import { Express } from "express";
-import { createTodoController, deleteTodoController, getAllTodoController, getTodoByIdController, updateTodoController } from "./todo.controller";
+import { createTodoController, deleteTodoController, getAllTodoController, getTodoByIdController, getTodoByUseridController, updateTodoController } from "./todo.controller";
+import { adminRoleAuth, bothRoleAuth, userRoleAuth } from "../middleware/bearAuth";
+//import isAuthenticated from "../middleware/bearAuth";
 
 const todo = (app: Express) => {
   //route path
   app.route("/todo").post(
+    adminRoleAuth,
     async (req, res, next) => {
       try {
         await createTodoController(req, res)
@@ -15,6 +18,8 @@ const todo = (app: Express) => {
 
   //get all todos
   app.route("/todos").post(
+    //isAuthenticated,  
+    adminRoleAuth,
    async (req, res, next) => {
       try {
         await getAllTodoController(req, res)
@@ -26,6 +31,7 @@ const todo = (app: Express) => {
 
   //get todo by id
   app.route("/todo/:id").get(
+    bothRoleAuth,
     async (req, res, next) => {
       try {
         await getTodoByIdController(req, res)
@@ -37,6 +43,7 @@ const todo = (app: Express) => {
 
   // update a todo by its ID
   app.route("/todo/:id").put(
+    adminRoleAuth,
     async (req, res, next) => {
       try {
         await updateTodoController(req, res)
@@ -48,6 +55,7 @@ const todo = (app: Express) => {
 
   //delete a todo by id
   app.route("/todo/:id").delete(
+    adminRoleAuth,
     async (req, res, next) => {
       try {
         await deleteTodoController(req, res)
@@ -57,6 +65,18 @@ const todo = (app: Express) => {
     }
   )
 
+  //get todos specific to a user
+  app.route("/todos/user/:userId").get(
+    userRoleAuth,
+    async (req, res, next) => {
+      try {
+        await getTodoByUseridController(req, res)
+      } catch (error) {
+        next(error)
+      }
+    }
+  )
+  
 }
 
 
