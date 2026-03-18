@@ -15,6 +15,13 @@
       "when": 1773403773092,
       "tag": "0001_lumpy_catseye",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1773475340630,
+      "tag": "0002_woozy_cammi",
+      "breakpoints": true
     }
   ]
 }

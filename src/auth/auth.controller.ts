@@ -1,10 +1,11 @@
 // Api level
 import { Request, Response } from "express";
-import { CreateUserService, getAllUsers, userLoginService } from "./auth.service";
+import { CreateUserService, getAllUsers, getUserByEmailService, userLoginService, verifyUserService, } from "./auth.service";
 import bycrypt from "bcryptjs";
 import { TodoTable } from "../Drizzle/schema";
 import  jwt from "jsonwebtoken";
 import "dotenv/config"
+import { sendMail } from "../Mailer/mailer";
 
 //from this end we have to create functions that will talk with the service
 
@@ -17,10 +18,32 @@ export const createUserController = async(req: Request, res:Response)=>{
     const hashedPassword = await bycrypt.hashSync(password, 10)
     user.password = hashedPassword;
 
+    // generate a 6 digit verification code
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString()
+    user.verificationCode = verificationCode;
+    user.isVerified = false;
+
+
     const createUser = await CreateUserService(user)
     if (!createUser) {
       return res.json({message: "User not created !"})
     }
+    try {
+      await sendMail(
+        user.email,
+        "verify your account",
+        `Hello ${user.lastName}, yoour verification code is: ${verificationCode}`,
+        `<div>
+          <h2>Hello ${user.lastName} </h2>  
+        <p>Your verificaton code is: <strong> ${verificationCode} </strong> </p>
+        <p> Enter this code to verify your account </p>
+        </div>`
+
+      )
+    } catch (emailError) {
+      console.error("Failed to send registration email:", emailError)
+    }
+
     return res.status(201).json({message: "createdUser"})
 
   } catch (error: any) {
@@ -41,6 +64,44 @@ export const getAllUsersController = async (req: Request, res: Response) => {
     return res.status(500).json({error: error.message})
   }
 }
+
+  //verify a user
+  export const verifyUserController = async (req: Request, res: Response) => {
+    const {email, code} = req.body
+    try {
+      const user = await getUserByEmailService(email)
+      if (!user) {
+        return res.status(404).json({message: "User not found!"})
+      }
+      if (user.verificationCode === code) {
+          await verifyUserService(email)
+
+            //send verification email to user
+          try {
+          await sendMail(
+            user.email,
+            "Account verified successfully",
+            `Hello ${user.lastName}, Your account was verified successfuly. You can now login and use the features`,
+            `<div>
+              <h2>Hello ${user.lastName} </h2>  
+            <p>Your account has been <strong> successfully verified </strong> </p>
+            <p> Enjoy the services. </p>
+            </div>`
+          )
+        } catch (error) {
+          console.error("Failed to send the verification: ", error)
+        }
+        return res.status(200).json({message: "User verified successfully!"})
+      } else {
+        return res.status(400).json({message: "
+          d verification code!"})
+      }
+    } catch (error: any) {
+      return res.status(500).json({error: error.message})
+    }
+
+  }
+
 
 //login a user controller
 export const loginUserController = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 // Database
-import { sql } from "drizzle-orm";
+import { SQL, sql } from "drizzle-orm";
 import db from "../Drizzle/db";
 import { TIUser, UsersTable } from "../Drizzle/schema";
 
@@ -15,6 +15,21 @@ export const getAllUsers = async () => {
   return allUsers
 }
 
+// verify a user
+export const verifyUserService = async (email: string) => {
+    await db.update(UsersTable)
+    .set({isVerified: true, verificationCode: null})
+    .where(sql`${UsersTable.email} = ${email}`)
+}
+
+// get a user by their email
+export const getUserByEmailService = async (email: string) => {
+  return await db.query.UsersTable.findFirst({
+    where: sql`${UsersTable.email} = ${email}`
+  })
+}
+
+
 //login a user
 export const userLoginService = async (user: TIUser) => {
   //email and password
@@ -29,4 +44,5 @@ export const userLoginService = async (user: TIUser) => {
     role: true
   }, where: sql `${UsersTable.email} = ${email}`
   })
+
 }

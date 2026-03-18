@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createTodoService, deleteTodoByIdService, getTodoByIdService, getTodoByUseridService, getTodoService, updateTodoByIdService,} from "./todo.services";
+import { TodoTable, UsersTable } from "../Drizzle/schema";
 
 // create a todo controller
 export const createTodoController = async(req: Request, res:Response) => {
@@ -120,6 +121,7 @@ export const getTodoByUseridController = async (req:Request, res:Response) => {
     if (isNaN(userId)) {
       return res.status(400).json({message: "Invalid user Id"});
     }
+
     const todos = await getTodoByUseridService(userId);
     if (!todos || todos.length === 0) {
       return res.status(404).json({message: "No Todos found for this user"})

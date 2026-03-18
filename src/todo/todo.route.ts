@@ -4,7 +4,7 @@ import { adminRoleAuth, bothRoleAuth, userRoleAuth } from "../middleware/bearAut
 //import isAuthenticated from "../middleware/bearAuth";
 
 const todo = (app: Express) => {
-  //route path
+  //route path for creating a todo
   app.route("/todo").post(
     adminRoleAuth,
     async (req, res, next) => {

@@ -5,7 +5,7 @@
     "module": "NodeNext",
     "rootDir": "./src",
     "moduleResolution": "nodenext",
-    
+    "isolatedModules": true,
     // File Layout
     "outDir": "./dist",
    
