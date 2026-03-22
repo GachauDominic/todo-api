@@ -9,7 +9,7 @@ Content-Type: application/json
   "firstName": "Ceo",
   "lastName": "owner",
   "email": "ceo@gmail.com",
-  "password": "ceo@gmail.com",
+  "password": "ceo123",
   "role": "both"
 }
 

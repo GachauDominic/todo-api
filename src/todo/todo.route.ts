@@ -6,7 +6,7 @@ import { adminRoleAuth, bothRoleAuth, userRoleAuth } from "../middleware/bearAut
 const todo = (app: Express) => {
   //route path for creating a todo
   app.route("/todo").post(
-    adminRoleAuth,
+    bothRoleAuth,
     async (req, res, next) => {
       try {
         await createTodoController(req, res)
@@ -19,7 +19,7 @@ const todo = (app: Express) => {
   //get all todos
   app.route("/todos").post(
     //isAuthenticated,  
-    adminRoleAuth,
+    bothRoleAuth,
    async (req, res, next) => {
       try {
         await getAllTodoController(req, res)
@@ -67,7 +67,7 @@ const todo = (app: Express) => {
 
   //get todos specific to a user
   app.route("/todos/user/:userId").get(
-    userRoleAuth,
+    bothRoleAuth,
     async (req, res, next) => {
       try {
         await getTodoByUseridController(req, res)

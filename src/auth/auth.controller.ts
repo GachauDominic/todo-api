@@ -32,7 +32,7 @@ export const createUserController = async(req: Request, res:Response)=>{
       await sendMail(
         user.email,
         "verify your account",
-        `Hello ${user.lastName}, yoour verification code is: ${verificationCode}`,
+        `Hello ${user.lastName}, your verification code is: ${verificationCode}`,
         `<div>
           <h2>Hello ${user.lastName} </h2>  
         <p>Your verificaton code is: <strong> ${verificationCode} </strong> </p>
@@ -44,7 +44,7 @@ export const createUserController = async(req: Request, res:Response)=>{
       console.error("Failed to send registration email:", emailError)
     }
 
-    return res.status(201).json({message: "createdUser"})
+    return res.status(201).json({message: "User created and verification sent to your email"})
 
   } catch (error: any) {
     return res.status(500).json({error: error.message})
@@ -93,8 +93,7 @@ export const getAllUsersController = async (req: Request, res: Response) => {
         }
         return res.status(200).json({message: "User verified successfully!"})
       } else {
-        return res.status(400).json({message: "
-          d verification code!"})
+        return res.status(400).json({message: " Invalid verification code!"})
       }
     } catch (error: any) {
       return res.status(500).json({error: error.message})
@@ -136,6 +135,7 @@ export const loginUserController = async (req: Request, res: Response) => {
     throw new Error("JWT_SECRET is not defined in the environment variable");
    }
    const token = jwt.sign(payload, secret);
+   
    
 
    //return the token with the user info

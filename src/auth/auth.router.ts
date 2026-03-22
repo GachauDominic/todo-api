@@ -2,7 +2,6 @@
 import { Express } from "express";
 import { createUserController, getAllUsersController, loginUserController, verifyUserController } from "./auth.controller";
 
-
 const user = (app: Express)=>{
   //route path
   app.route("/auth/register").post(

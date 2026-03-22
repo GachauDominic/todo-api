@@ -13,16 +13,16 @@ jest.mock("../../src/Drizzle/db", () => ({
 	query: { //mocking the query metshod from/with db
 		UsersTable: {
 			findFirst: jest.fn()
-		}
+		},
 	}
 }))
 
-describe("Auth service", ()=>{
+describe ("Auth service", ()=>{
 	afterEach( ()=>{
 		jest.clearAllMocks()
 	})
 
-	// testing the creatoin of a user
+	// testing the creation of a user
 	describe("CreateUserService", ()=>{
 		it("should insert a user and return a success message", async()=>{
 			const user = {
@@ -68,7 +68,5 @@ describe("Auth service", ()=>{
 			expect(result).toBeNull()
 		})
 	})
-
-
-
 })
+

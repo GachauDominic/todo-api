@@ -15,5 +15,5 @@ const main = async ()=>{
 }
 main();
 
-const db = drizzle(client, {schema, logger:true});
+const db = drizzle(client, {schema, logger: false});
 export default db;

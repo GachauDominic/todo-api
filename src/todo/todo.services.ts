@@ -33,7 +33,7 @@ export const updateTodoByIdService = async (id: number, todo: TITodo) => {
 
 //delete a todo by its id
 export const deleteTodoByIdService = async (id: number) => {
-  await db.delete(TodoTable).where(eq(TodoTable.id, id)).returning()
+  await db.delete(TodoTable).where(eq(TodoTable.id, id))//.returning()
   return "Todo deleted successfully";
 }
 

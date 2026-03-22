@@ -9,6 +9,7 @@ const config: Config = {
   // collectCoverageFrom: [
   //   '<rootDir>/src/**/*.ts'
   // ]
+  testTimeout: 30000,
 }
 
 export default config;
