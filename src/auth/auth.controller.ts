@@ -51,7 +51,6 @@ export const createUserController = async(req: Request, res:Response)=>{
   }
 }
 
-
 //get all users
 export const getAllUsersController = async (req: Request, res: Response) => {
   try {

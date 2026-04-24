@@ -15,6 +15,7 @@ export const UsersTable = pgTable("users", {
   email: varchar("email", {length: 100}).unique().notNull(),
   password: varchar("password", {length: 255}).notNull(),
   role: roleEnum("role").default("user"),
+  image_url: varchar("image_url", {length: 255}).default('https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'),
   isVerified: boolean("is-verified").default(false),
   verificationCode: varchar("verification-code", {length: 10})
 })
@@ -27,7 +28,7 @@ export const TodoTable = pgTable("todo", {
   todoName: varchar("todo-name", {length: 100}).notNull(),
   createdAt: timestamp("created-at").defaultNow(),
   dueDate: timestamp("due-date"),
-  descrption: text("description"),
+  description: text("description"),
   isCompleted: boolean("is-completed").default(false)
 })
 

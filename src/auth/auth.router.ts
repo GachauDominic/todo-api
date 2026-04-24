@@ -1,6 +1,6 @@
-//routing
 import { Express } from "express";
 import { createUserController, getAllUsersController, loginUserController, verifyUserController } from "./auth.controller";
+import { adminRoleAuth } from "../middleware/bearAuth";
 
 const user = (app: Express)=>{
   //route path
@@ -39,7 +39,8 @@ const user = (app: Express)=>{
 
 
   //get all users
-  app.route("/auth/users").post(
+  app.route("/auth/users").get(
+    adminRoleAuth,
     async (req, res, next) => {
       try {
         await getAllUsersController(req, res)
@@ -48,8 +49,30 @@ const user = (app: Express)=>{
       }
     }
   )
-  
-  
+
+  // update user by id route
+  // app.route("/user/:id").put(
+  //     bothRoleAuth,
+  //     async (req, res, next) => {
+  //         try {
+  //             await updateUserByIdController(req, res)
+  //         } catch (error) {
+  //             next(error)
+  //         }
+  //     }
+  // )
+
+  // // get user by id route
+  // app.route("/user/:id").get(
+  //     bothRoleAuth,
+  //     async (req, res, next) => {
+  //         try {
+  //             await getUserByIdController(req, res)
+  //         } catch (error) {
+  //             next(error)
+  //         }
+  //     }
+  // )
   
 }
 

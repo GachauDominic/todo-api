@@ -2,4 +2,19 @@ $kind: http-request
 name: register
 url: ""
 method: GET
+body:
+  type: json
+  content: "{\r
+
+    \  \"firstName\": \"Ceo\",\r
+
+    \  \"lastName\": \"Founder\",\r
+
+    \  \"email\": \"ceo@gmail.com\",\r
+
+    \  \"password\": \"ceo123\",\r
+
+    \  \"role\": \"admin\"\r
+
+    }"
 order: 1773385027569

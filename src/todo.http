@@ -1,17 +1,6 @@
 #Test the base URL
 GET http://localhost:8080
 
-### Create a user
-POST http://localhost:8080/auth/register
-Content-Type: application/json
-
-{
-  "firstName": "Ceo",
-  "lastName": "owner",
-  "email": "ceo@gmail.com",
-  "password": "ceo123",
-  "role": "both"
-}
 
 ### Create a todo
 POST http://localhost:8080/todo
@@ -27,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Get all Todos
-POST http://localhost:8080/todos
+GET http://localhost:8080/todos
 
 
 ### Get a todo by Id
@@ -49,6 +38,18 @@ Content-Type: application/json
 ### delete a todo by its id
 DELETE http://localhost:8080/todo/34
 
+### Create a user
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Ceo",
+  "lastName": "owner",
+  "email": "ceo@gmail.com",
+  "password": "ceo123",
+  "role": "both"
+}
+
 
 ### login a user
 POST http://localhost:8080/auth/login
@@ -61,7 +62,7 @@ Content-Type: application/json
 
 
 ### get all users
-POST http://localhost:8080/auth/users
+GET http://localhost:8080/auth/users
 
 
 ### get todos to a specific user

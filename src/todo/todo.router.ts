@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { createTodoController, deleteTodoController, getAllTodoController, getTodoByIdController, getTodoByUseridController, updateTodoController } from "./todo.controller";
 import { adminRoleAuth, bothRoleAuth, userRoleAuth } from "../middleware/bearAuth";
-//import isAuthenticated from "../middleware/bearAuth";
+// import isAuthenticated from "../middleware/bearAuth";
 
 const todo = (app: Express) => {
   //route path for creating a todo
@@ -17,9 +17,10 @@ const todo = (app: Express) => {
   )
 
   //get all todos
-  app.route("/todos").post(
-    //isAuthenticated,  
-    bothRoleAuth,
+  app.route("/todos").get(
+    // isAuthenticated,  
+    // bothRoleAuth,
+    adminRoleAuth,
    async (req, res, next) => {
       try {
         await getAllTodoController(req, res)
