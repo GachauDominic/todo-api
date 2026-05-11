@@ -1,6 +1,6 @@
 // Api level
 import { Request, Response } from "express";
-import { CreateUserService, getAllUsers, getUserByEmailService, userLoginService, verifyUserService, } from "./auth.service";
+import { CreateUserService, getAllUsers, getUserByEmailService, getUserByIdService, updateUserByIdService, userLoginService, verifyUserService, } from "./auth.service";
 import bycrypt from "bcryptjs";
 import { TodoTable } from "../Drizzle/schema";
 import  jwt from "jsonwebtoken";
@@ -63,6 +63,57 @@ export const getAllUsersController = async (req: Request, res: Response) => {
     return res.status(500).json({error: error.message})
   }
 }
+
+//get a user by their Id
+export const getUserByIdController = async (req: Request, res:Response) => {
+  try {
+      const id = parseInt(req.params.id as string)
+      if ( isNaN(id) ) {
+         return res.status(400).json({message: `Invalid ID!`})
+      }
+  
+      const user = await getUserByIdService(id)
+      if (!user) {
+        return res.status(404).json({message: "No User Found!"})
+      }
+      return res.status(200).json({data: user})
+    } catch (error: any) {
+      return res.status(500).json({error: error.message})
+    }
+  }
+
+  // Update a user by their Id
+  export const updateUserByIdController = async(req: Request, res:Response) => {
+    try {
+      const id = parseInt(req.params.id as string)
+      if ( isNaN(id) ) {
+         return res.status(400).json({message: `Invalid ID!`})
+      }
+  
+      const user = req.body;
+  
+      //convert dueDate to a Date Object if provided
+      // if(user.role) {
+      //   user.role = new (user.role)
+      // }
+  
+      //check if the user is existing
+      const ifExistingUser = await updateUserByIdService(id, user)
+      if (!ifExistingUser) {
+        return res.status(404).json({message: "User not found!"})
+      }
+  
+      const updatedUser
+       = await updateUserByIdService(id, user)
+      if (!updatedUser) {
+        return res.status(400).json({message: "User not updated!"})
+      }
+      return res.status(200).json({message: `User updated successfully`, data: user})
+      
+    } catch (error: any) {
+      return res.status(500).json({error: error.message})
+    }
+  }
 
   //verify a user
   export const verifyUserController = async (req: Request, res: Response) => {
@@ -134,17 +185,15 @@ export const loginUserController = async (req: Request, res: Response) => {
     throw new Error("JWT_SECRET is not defined in the environment variable");
    }
    const token = jwt.sign(payload, secret);
-   
-   
 
    //return the token with the user info
    return res.status(200).json({
     messsage: "The login was successfull",
     token,
     user: {
-      "user-id": userExisting.id,
-      "fist-name": userExisting.firstName,
-      "last-name": userExisting.lastName,
+      "user_id": userExisting.id,
+      "first_name": userExisting.firstName,
+      "last_name": userExisting.lastName,
       "email": userExisting.email,
       "role": userExisting.role
      }
@@ -155,3 +204,4 @@ export const loginUserController = async (req: Request, res: Response) => {
     
   }
 }
+

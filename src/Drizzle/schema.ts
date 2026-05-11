@@ -20,7 +20,6 @@ export const UsersTable = pgTable("users", {
   verificationCode: varchar("verification-code", {length: 10})
 })
 
-
 // Todo Table
 export const TodoTable = pgTable("todo", {
   id: serial("id").primaryKey(),

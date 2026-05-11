@@ -1,5 +1,5 @@
 // Database
-import { SQL, sql } from "drizzle-orm";
+import { eq, SQL, sql } from "drizzle-orm";
 import db from "../Drizzle/db";
 import { TIUser, UsersTable } from "../Drizzle/schema";
 
@@ -29,6 +29,18 @@ export const getUserByEmailService = async (email: string) => {
   })
 }
 
+// get user by their id
+export const getUserByIdService = async(id:number) => {
+  return await db.query.UsersTable.findFirst({
+    where: sql`${UsersTable.id} = ${id}`
+  })
+}
+
+//update a user by their Id
+export const updateUserByIdService = async(id: number, user:TIUser) => {
+  await db.update(UsersTable).set(user).where(eq(UsersTable.id, id))
+  return "User updated successfully!"
+}
 
 //login a user
 export const userLoginService = async (user: TIUser) => {
