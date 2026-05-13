@@ -19,7 +19,7 @@ const todo = (app: Express) => {
   //get all todos
   app.route("/todos").get(
     // isAuthenticated,  
-    bothRoleAuth,
+    // bothRoleAuth,
     adminRoleAuth,
    async (req, res, next) => {
       try {
@@ -44,7 +44,7 @@ const todo = (app: Express) => {
 
   // update a todo by its ID
   app.route("/todo/:id").put(
-    adminRoleAuth,
+    bothRoleAuth,
     async (req, res, next) => {
       try {
         await updateTodoController(req, res)

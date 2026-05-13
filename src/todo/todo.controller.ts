@@ -62,9 +62,7 @@ export const updateTodoController = async (req: Request, res: Response) => {
     if ( isNaN(id) ) {
        return res.status(400).json({message: `Invalid ID!`})
     }
-
     const todo = req.body;
-
     //convert dueDate to a Date Object if provided
     if(todo.dueDate) {
       todo.dueDate = new Date(todo.dueDate)
@@ -80,9 +78,9 @@ export const updateTodoController = async (req: Request, res: Response) => {
     if (!updatedTodo) {
       return res.status(400).json({message: "Todo not updated!"})
     }
-    return res.status(200).json({message: `Todo updated successfully`, data: todo})
-
-    
+    return res.status(200).json({
+      message: `Todo updated successfully`, 
+      data: updatedTodo});
   } catch (error: any) {
     return res.status(500).json({error: error.message})
   }
