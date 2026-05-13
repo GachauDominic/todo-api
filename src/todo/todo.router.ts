@@ -19,7 +19,7 @@ const todo = (app: Express) => {
   //get all todos
   app.route("/todos").get(
     // isAuthenticated,  
-    // bothRoleAuth,
+    bothRoleAuth,
     adminRoleAuth,
    async (req, res, next) => {
       try {

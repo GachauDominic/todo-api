@@ -25,7 +25,6 @@ const user = (app: Express)=>{
     }
   )
 
-
   //verify route
   app.route("/auth/verify").post(
     async (req, res, next) => {
@@ -36,7 +35,6 @@ const user = (app: Express)=>{
       }
     }
   )
-
 
   //get all users
   app.route("/auth/users").get(
