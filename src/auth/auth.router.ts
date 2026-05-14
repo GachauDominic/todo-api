@@ -50,7 +50,7 @@ const user = (app: Express)=>{
 
  // update user by id route
   app.route("/auth/user/:id").put(
-      adminRoleAuth,
+      bothRoleAuth,
       async (req, res, next) => {
         try {
           await updateUserByIdController(req, res)
