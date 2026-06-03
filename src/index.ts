@@ -12,7 +12,7 @@ const initializeApp = ()=> {
   //middleware
   // be ware that the cors shold be used after the first two express 
   app.use(cors({
-    origin: "*",
+    origin: "https://todo-client-iota-ten.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE" ],
   }))
 
