@@ -12,7 +12,7 @@ const initializeApp = ()=> {
   //middleware
   // be ware that the cors shold be used after the first two express 
   app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE" ],
   }))
 
