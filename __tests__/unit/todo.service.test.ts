@@ -21,8 +21,6 @@ beforeEach(()=>{
   jest.clearAllMocks();
 });
 
-
-
 describe("Todo service", ()=>{
   // test the insertion of a todo
 	describe("createTodoService", ()=>{
@@ -42,8 +40,8 @@ describe("Todo service", ()=>{
         })
       })
 
-      const result =await createTodoService(todo)
-
+      const result = await createTodoService(todo)
+=
 			expect(db.insert).toHaveBeenCalledWith(TodoTable)
 			expect(result).toEqual(inserted)
 		})
@@ -92,7 +90,7 @@ describe("Todo service", ()=>{
 
 
   describe("getTodoByIdService", ()=>{
-    it("should retun a todo if found", async()=>{
+    it("should retun a todo if found through userId", async()=>{
       const todo = {
         id: 1,
         todoName: "Todo 1",
@@ -116,7 +114,7 @@ describe("Todo service", ()=>{
 
   //update todo by id test
   describe("updateTodoByIdService", ()=>{
-    it("should update a todod and return a success message", async()=>{
+    it("should update a todo and return a success message", async()=>{
       (db.update as jest.Mock).mockReturnValue({
         set: jest.fn().mockReturnValue({
           where: jest.fn().mockReturnValueOnce(undefined)

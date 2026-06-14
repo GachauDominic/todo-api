@@ -1,7 +1,6 @@
 import {createUserController} from '../../src/auth/auth.controller'
 // import { Request } from 'supertest'
 import request from 'supertest'
-import bycrypt from 'bcryptjs'
 import app from '../../src/index' 
 import { UsersTable } from '../../src/Drizzle/schema'
 import db from '../../src/Drizzle/db'
@@ -30,7 +29,7 @@ describe("post /auth/register", ()=>{
     .post("/auth/register")
     .send({
      ...testUser,
-     password: bycrypt.hashSync(testUser.password, 10)
+     password: bcrypt.hashSync(testUser.password, 10)
     })
 
     expect(res.statusCode).toBe(201)
@@ -43,7 +42,7 @@ describe("post /auth/register", ()=>{
     .post("/auth/register")
     .send({
      ...testUser,
-     password: bycrypt.hashSync(testUser.password, 10)
+     password: bcrypt.hashSync(testUser.password, 10)
     })
 
     expect(res.statusCode).toBe(500)

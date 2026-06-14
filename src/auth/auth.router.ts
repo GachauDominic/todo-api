@@ -3,7 +3,7 @@ import { createUserController, getAllUsersController, getUserByIdController, log
 import { adminRoleAuth, bothRoleAuth } from "../middleware/bearAuth";
 
 const user = (app: Express)=>{
-  //route path
+  //register path
   app.route("/auth/register").post(
     async (req, res, next) => {
       try {

@@ -1,7 +1,7 @@
 // Api level
 import { Request, Response } from "express";
 import { CreateUserService, getAllUsers, getUserByEmailService, getUserByIdService, updateUserByIdService, userLoginService, verifyUserService, } from "./auth.service";
-import bycrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { TodoTable } from "../Drizzle/schema";
 import  jwt from "jsonwebtoken";
 import "dotenv/config"
@@ -15,7 +15,7 @@ export const createUserController = async(req: Request, res:Response)=>{
   try {
     const user = req.body
     const password = user.password;
-    const hashedPassword = await bycrypt.hashSync(password, 10)
+    const hashedPassword = await bcrypt.hashSync(password, 10)
     user.password = hashedPassword;
 
     // generate a 6 digit verification code
@@ -164,7 +164,7 @@ export const loginUserController = async (req: Request, res: Response) => {
    }
 
    //verify the password with the hash 
-   const userMatch = await bycrypt.compareSync(user.password, userExisting.password)
+   const userMatch = await bcrypt.compareSync(user.password, userExisting.password)
    if (!userMatch) {
     return res.status(401).json({message: "Invalid credentials"})
    };

@@ -1,7 +1,6 @@
 import {createUserController} from '../../src/auth/auth.controller'
 // import { Request } from 'supertest'
 import request from 'supertest'
-import bycrypt from 'bcryptjs'
 import app from '../../src/index' 
 import { UsersTable } from '../../src/Drizzle/schema'
 import db from '../../src/Drizzle/db'
@@ -77,7 +76,4 @@ describe("Post /auth/login", ()=>{
 
   //
 
-  
 })
-
-
