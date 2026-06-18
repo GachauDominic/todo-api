@@ -10,7 +10,7 @@ const initializeApp = ()=> {
    app.use(express.json())
 
   //middleware
-  // be ware that the cors shold be used after the first two express 
+  // be ware that the cors should be used after the first two express 
   app.use(cors({
     origin: "https://todo-client-iota-ten.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE" ],
@@ -31,7 +31,3 @@ const initializeApp = ()=> {
 }
 const app = initializeApp()
 export default app
-
-
-
-

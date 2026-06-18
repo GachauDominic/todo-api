@@ -24,7 +24,6 @@ afterAll( async () => {
 
 describe("post /auth/register", ()=>{
   it.skip("should register a new user", async()=>{
-
     const res = await request(app)
     .post("/auth/register")
     .send({

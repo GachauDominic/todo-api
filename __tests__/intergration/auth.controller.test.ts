@@ -68,7 +68,7 @@ describe("Post /auth/login", ()=>{
     .post("/auth/login")
     .send({
       email: "euejue@gmail.com",
-      password: "testUser@gmail.com"
+      password: "testpass123"
     })
     expect(res.statusCode).toBe(404)
     expect(res.body).toEqual({message : "The user does not exist"})
@@ -77,3 +77,4 @@ describe("Post /auth/login", ()=>{
   //
 
 })
+

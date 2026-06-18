@@ -5,12 +5,12 @@ const BASE_URL = 'http://localhost:8080';
 
 export const options = {
   stages: [
-    {duration:'30s' , target: 40},
-    {duration:'40s' , target: 50},
-    {duration:'10s' , target: 0}
+    {duration:'20s' , target: 15}, //ramp-up to 40 users over 30 sec
+    {duration:'30s' , target: 25}, //stay at 50 users over 40 sec
+    {duration:'10s' , target: 0} //ramp-down to 0 users over the last 10 sec
   ],
 
-  ext: {
+  ext: { //ext=extensions
     loadImpact: {
       name : 'Todos GET Load Test',
     }
@@ -19,11 +19,11 @@ export const options = {
 
 export default function (){
   //If verification is required add a valid Token here
-  // const token  = `YOU_VALID_TOKEN`;
+  // const token  = ``;
   const res = http.get(`${BASE_URL}/todos`, {
     headers: {
       'Content-Type': 'application/json',
-      // 'Aurhorization': `Bearer ${token}
+      // 'Aurhorization': `Bearer ${token}`,
     },
   }) ;
 

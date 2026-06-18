@@ -8,11 +8,11 @@ export const options = {
 
 export default function () {
     const url = 'http://localhost:8080/todos';
-
+    const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyNDgsInVzZXItaWQiOjEyNDgsImZpc3QtbmFtZSI6IkRvbSIsImxhc3QtbmFtZSI6Ik1haXNoIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNzgxODE2MTI1LCJpYXQiOjE3ODE3Mjk3MjV9.sQBBs7pAXl0N7npZ-9vjeUIlEcqPZLcDAiKxVChogo0`
     const params = {
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer YOUR_VALID_ADMIN_TOKEN`
+            'Authorization': `Bearer ${token}`
         },
     };
 

@@ -10,12 +10,12 @@ export const options = {
 export default function () {
   const url = 'http://localhost:8080/auth/login';
   const payload  = JSON.stringify({
-    email: 'dominicmgachau@gmail.com',
-    password: 'dom@gmail.com'
+    email: 'dommaish@example.com',
+    password: '123456'
   })
   
   const params = {
-    headers:{ //be sure NOT to use the keyword 'Headeres'
+    headers: { //be sure NOT to use the keyword 'Headeres'
       'Content-Type': 'application/json'
     },
   }
